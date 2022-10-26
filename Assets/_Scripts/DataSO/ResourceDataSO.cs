@@ -21,5 +21,5 @@ public enum ResourceType
 {
     None,
     Health,
-    Ammo
+    Ammo,
 }
