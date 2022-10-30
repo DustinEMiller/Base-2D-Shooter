@@ -15,11 +15,14 @@ public class ResourceDataSO : ScriptableObject
     {
         return Random.Range(minAmount, maxAmount + 1);
     }
+    
+    
 }
 
 public enum ResourceType
 {
     None,
     Health,
-    Ammo,
+    Xp,
+    Money
 }

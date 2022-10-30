@@ -285,6 +285,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6d0857a42c6a5124b9ee327c66e5d0dd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  <OnBackwardsMovement>k__BackingField:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!82 &1739356871853634092
 AudioSource:
   m_ObjectHideFlags: 0
@@ -431,7 +434,7 @@ MonoBehaviour:
   - {x: -0.2933178, y: -0.32734054, z: 0}
   m_ShapePathHash: 79890598
   m_Mesh: {fileID: 0}
-  m_InstanceId: 38438
+  m_InstanceId: 69616
 --- !u!1 &1739356872016692702
 GameObject:
   m_ObjectHideFlags: 0
@@ -1099,10 +1102,11 @@ GameObject:
   - component: {fileID: 1739356873760814772}
   - component: {fileID: 1739356873760814773}
   - component: {fileID: 1739356873760814779}
-  - component: {fileID: 1739356873760814775}
   - component: {fileID: 1739356873760814774}
+  - component: {fileID: 7664331744429372204}
   - component: {fileID: 1739356873760814778}
   - component: {fileID: 1739356873760814769}
+  - component: {fileID: 1739356873760814775}
   m_Layer: 10
   m_Name: EnemyChort
   m_TagString: Untagged
@@ -1181,22 +1185,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
---- !u!70 &1739356873760814775
-CapsuleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1739356873760814776}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0.014147997, y: 0.017685056}
-  m_Size: {x: 0.7122216, y: 1.3041837}
-  m_Direction: 0
 --- !u!114 &1739356873760814774
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1289,6 +1277,98 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
   <enemyAttack>k__BackingField: {fileID: 0}
+--- !u!114 &7664331744429372204
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1739356873760814776}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 56610e45b4bbf334792a6286b9ade767, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <OnGetHit>k__BackingField:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1922363072}
+        m_TargetAssemblyTypeName: FeedbackPlayer, Assembly-CSharp
+        m_MethodName: PlayFeedback
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1739356872415730998}
+        m_TargetAssemblyTypeName: AgentSounds, Assembly-CSharp
+        m_MethodName: PlayHitSound
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  <OnDie>k__BackingField:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1739356872415730998}
+        m_TargetAssemblyTypeName: AgentSounds, Assembly-CSharp
+        m_MethodName: PlayDeathSound
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1739356873760814775}
+        m_TargetAssemblyTypeName: UnityEngine.Behaviour, UnityEngine
+        m_MethodName: set_enabled
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 399450598}
+        m_TargetAssemblyTypeName: FeedbackPlayer, Assembly-CSharp
+        m_MethodName: PlayFeedback
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 8912937644505858368}
+        m_TargetAssemblyTypeName: ItemDropper, Assembly-CSharp
+        m_MethodName: DropItem
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  healthAmount: 0
+  maxHealth: 0
 --- !u!114 &1739356873760814778
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1364,6 +1444,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <AttackdDelay>k__BackingField: 1
+--- !u!70 &1739356873760814775
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1739356873760814776}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0.014147997, y: 0.017685056}
+  m_Size: {x: 0.7122216, y: 1.3041837}
+  m_Direction: 0
 --- !u!1 &1739356873869822457
 GameObject:
   m_ObjectHideFlags: 0

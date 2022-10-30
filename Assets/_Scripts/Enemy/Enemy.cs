@@ -3,25 +3,16 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class Enemy : MonoBehaviour, IHittable, IAgent, IKnockback
+public class Enemy : MonoBehaviour, IKnockback
 {
     
     [field: SerializeField]
     public EnemyDataSO EnemyData { get; set; }
-    
-    [field: SerializeField]
-    public UnityEvent OnGetHit { get; set; }
-
-    [field: SerializeField]
-    public UnityEvent OnDie { get; set; }
-    public int Health { get; set; } = 2;
 
     [field: SerializeField]
     public EnemyAttack enemyAttack { get; set; }
-
-    private bool dead = false;
-
     private AgentMovement agentMovement;
+    private AgentHealthSystem _healthSystem;
 
 
     private void Awake()
@@ -32,23 +23,8 @@ public class Enemy : MonoBehaviour, IHittable, IAgent, IKnockback
         }
 
         agentMovement = GetComponent<AgentMovement>();
-    }
-    private void Start()
-    {
-        Health = EnemyData.MaxHealth;
-    }
-    public void GetHit(int damage, GameObject damageDealer)
-    {
-        if (!dead)
-        {
-            Health -= damage;
-            OnGetHit?.Invoke();
-            if (Health <= 0)
-            {
-                dead = true;
-                OnDie?.Invoke();
-            }
-        }
+        _healthSystem = GetComponent<AgentHealthSystem>();
+        _healthSystem.SetHealthAmountMax(EnemyData.MaxHealth, true);
     }
 
     public void Die()
@@ -58,7 +34,7 @@ public class Enemy : MonoBehaviour, IHittable, IAgent, IKnockback
 
     public void PerformAttack()
     {
-        if (!dead)
+        if (!_healthSystem.isDead())
         {
             enemyAttack.Attack(EnemyData.Damage);
         }
