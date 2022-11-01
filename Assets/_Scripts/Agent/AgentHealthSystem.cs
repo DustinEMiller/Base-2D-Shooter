@@ -97,7 +97,7 @@ public class AgentHealthSystem : MonoBehaviour, IHittable
     }
     
     public void GetHit(int damage, GameObject damageDealer)
-    {
+    { 
         Damage(damage);
     }
 }

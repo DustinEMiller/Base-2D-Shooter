@@ -89,7 +89,8 @@ public class Weapon : MonoBehaviour
     private void SpawnBullet(Vector3 position, Quaternion angle)
     {
         var bulletPrefab = Instantiate(weaponData.BulletData.bulletPrefab, position, angle);
-        bulletPrefab.GetComponent<Bullet>().BulletData = weaponData.BulletData;
+        bulletPrefab.GetComponent<IBullet>().BulletData = weaponData.BulletData;
+        bulletPrefab.GetComponent<IBullet>().IsPlayerOwner = true;
     }
 
     private Quaternion CalculateAngle(GameObject muzzle)

@@ -2,22 +2,26 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RegularBullet : Bullet
+public class RegularBullet : MonoBehaviour, IBullet
 {
-    protected Rigidbody2D rigidBody2D;
     private bool isDead = false;
+    private BulletDataSO _BulletData;
 
-    public override BulletDataSO BulletData
+    protected Rigidbody2D rigidBody2D;
+
+    public BulletDataSO BulletData
     {
-        get => base.BulletData;
+        get => _BulletData;
         set
         {
-            base.BulletData = value;
+            _BulletData = value;
             rigidBody2D = GetComponent<Rigidbody2D>();
             rigidBody2D.drag = BulletData.Friction;
         } 
     }
-    
+
+    public bool IsPlayerOwner {get; set; }
+
     private void FixedUpdate()
     {
         if (rigidBody2D != null && BulletData != null)
@@ -35,17 +39,23 @@ public class RegularBullet : Bullet
 
         isDead = true;
         var hittable = collision.GetComponent<IHittable>();
-        hittable?.GetHit(BulletData.Damage, gameObject);
-
+        
         if (collision.gameObject.layer == LayerMask.NameToLayer("Obstacle"))
         {
             HitObstacle(collision);
+            hittable?.GetHit(BulletData.Damage, gameObject);
         }
         else if (collision.gameObject.layer == LayerMask.NameToLayer("Enemy"))
         {
             HitEnemy(collision);
+            hittable?.GetHit(BulletData.Damage, gameObject);
         }
-        Destroy(gameObject);
+        
+        if (IsPlayerOwner && collision.gameObject.layer != LayerMask.NameToLayer("Player"))
+        {
+            Destroy(gameObject);
+        }
+        
     }
     
     private void HitEnemy(Collider2D collision)
