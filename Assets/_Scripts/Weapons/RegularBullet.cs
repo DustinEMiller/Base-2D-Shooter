@@ -50,12 +50,8 @@ public class RegularBullet : MonoBehaviour, IBullet
             HitEnemy(collision);
             hittable?.GetHit(BulletData.Damage, gameObject);
         }
-        
-        if (IsPlayerOwner && collision.gameObject.layer != LayerMask.NameToLayer("Player"))
-        {
-            Destroy(gameObject);
-        }
-        
+        Destroy(gameObject);
+
     }
     
     private void HitEnemy(Collider2D collision)

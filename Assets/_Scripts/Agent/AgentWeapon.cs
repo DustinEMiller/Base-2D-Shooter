@@ -6,8 +6,8 @@ public class AgentWeapon : MonoBehaviour
 {
     protected float desiredAngle;
     
-    [SerializeField]protected WeaponRenderer weaponRenderer;
-    [SerializeField]protected Weapon weapon;
+    [SerializeField] protected WeaponRenderer weaponRenderer;
+    [SerializeField] protected Weapon weapon;
 
     private void Awake()
     {
@@ -20,9 +20,9 @@ public class AgentWeapon : MonoBehaviour
         weapon = GetComponentInChildren<Weapon>();
     }
 
-    public virtual void AimWeapon(Vector2 pointerPosition)
+    public virtual void AimWeapon(Vector2 targetPosition)
     {
-        var aimDirection = (Vector3) pointerPosition - transform.position;
+        var aimDirection = (Vector3) targetPosition - transform.position;
         desiredAngle = Mathf.Atan2(aimDirection.y, aimDirection.x) * Mathf.Rad2Deg;
         AdjustWeaponRendering();
         transform.rotation = Quaternion.AngleAxis(desiredAngle, Vector3.forward);
@@ -41,7 +41,7 @@ public class AgentWeapon : MonoBehaviour
     {
         if (weapon != null)
         {
-            weapon.TryShooting();
+            //weapon.TryShooting();
         }
         
     }
@@ -50,7 +50,7 @@ public class AgentWeapon : MonoBehaviour
     {
         if (weapon != null)
         {
-            weapon.StopShooting();
+            //weapon.StopShooting();
         }
     }
 }

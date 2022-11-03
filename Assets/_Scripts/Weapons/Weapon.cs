@@ -1,86 +1,55 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using Random = UnityEngine.Random;
 
 public class Weapon : MonoBehaviour
 {
     [SerializeField] protected GameObject muzzle;
     [SerializeField] protected int ammo = 10;
     [SerializeField] protected WeaponDataSO weaponData;
-
-    public int Ammo
-    {
-        get { return ammo; }
-        set
-        {
-            ammo = Mathf.Clamp(value, 0, weaponData.AmmoCapacity);
-            OnAmmoChange?.Invoke(ammo);
-        }
-    }
-
-    public bool AmmoFull
-    {
-        get => Ammo >= weaponData.AmmoCapacity;
-    }
-
-    protected bool isShooting = false;
-
-    [SerializeField] protected bool reloadCoroutine = false;
+    [SerializeField] private Enemy target;
+    [SerializeField] private CooldownSystem cooldownSystem;
     [field: SerializeField] public UnityEvent OnShoot{ get; set; }
-    [field: SerializeField] public UnityEvent OnShootNoAmmo{ get; set; }
-    [field: SerializeField] public UnityEvent<int> OnAmmoChange{ get; set; }
-
-    private void Start()
-    {
-        Ammo = weaponData.AmmoCapacity;
-    }
+    [field: SerializeField] public UnityEvent OnGetTarget{ get; set; }
 
     private void Update()
     {
         UseWeapon();
+        TargetEnemy();
+    }
+
+    private void TargetEnemy()
+    {
+        if (target != null) return;
+        
+        Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, 5f);
+        foreach (Collider2D collider2d in colliders)
+        {
+            if (collider2d.TryGetComponent<Enemy>(out Enemy enemy) && target == null)
+            {
+                target = enemy;
+                OnGetTarget?.Invoke();
+            }
+        }
+        
     }
 
     private void UseWeapon()
     {
-        if (isShooting && reloadCoroutine == false)
+        if (target && !cooldownSystem.IsOnCoolDown(weaponData.Id))
         {
-            if (Ammo > 0)
+            OnShoot?.Invoke();
+            cooldownSystem.PutOnCoolDown(weaponData);
+            for (int i = 0; i < weaponData.GetBulletCountToSpawn(); i++)
             {
-                Ammo--;
-                OnShoot?.Invoke();
-                for (int i = 0; i < weaponData.GetBulletCountToSpawn(); i++)
-                {
-                    ShootBullet();
-                }
+                ShootBullet();
             }
-            else
-            {
-                isShooting = false;
-                OnShootNoAmmo?.Invoke();
-                return;
-            }
-
-            FinishShooting();
         }
     }
-
-    private void FinishShooting()
-    {
-        StartCoroutine(DelayNextShotCoroutine());
-        if (weaponData.AutomaticFire == false)
-        {
-            isShooting = false;
-        }
-    }
-
-    protected IEnumerator DelayNextShotCoroutine()
-    {
-        reloadCoroutine = true;
-        yield return new WaitForSeconds(weaponData.WeaponDelay);
-        reloadCoroutine = false;
-    }
-
+    
     private void ShootBullet()
     {
         SpawnBullet(muzzle.transform.position, CalculateAngle(muzzle));
@@ -99,19 +68,5 @@ public class Weapon : MonoBehaviour
         Quaternion bulletSpreadRotation = Quaternion.Euler(new Vector3(0,0,spread));
         return muzzle.transform.rotation * bulletSpreadRotation;
     }
-
-    public void TryShooting()
-    {
-        isShooting = true;
-    }
     
-    public void StopShooting()
-    {
-        isShooting = false;
-    }
-
-    public void Reload(int ammo)
-    {
-        Ammo += ammo;
-    }
 }

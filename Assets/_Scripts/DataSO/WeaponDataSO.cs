@@ -1,30 +1,23 @@
 using System.Collections;
 using System.Collections.Generic;
+using _Scripts.Interfaces;
 using UnityEngine;
 
 [CreateAssetMenu(menuName = "Weapons/WeaponData")]
-public class WeaponDataSO : ScriptableObject
+public class WeaponDataSO : ScriptableObject, IHasCoolDown
 {
-    [field: SerializeField] 
-    public BulletDataSO BulletData { get; set; }
-    
-    [field: SerializeField] 
-    [field: Range(0,350)] 
-    public int AmmoCapacity { get; set; } = 100;
+    [field: SerializeField] public BulletDataSO BulletData { get; set; }
     [field: SerializeField] public bool AutomaticFire { get; set; } = false;
-
-    [field: SerializeField]
-    [field: Range(0.1f, 2f)]
-    public float WeaponDelay { get; set; } = 0.1f;
-
-    [field: SerializeField]
-    [field: Range(0, 10)]
-    public float SpreadAngle { get; set; } = 5;
+    [field: SerializeField] public float CoolDownDuration { get; private set; } = 0.1f;
+    [field: SerializeField] [field: Range(0, 10)] public float SpreadAngle { get; set; } = 5;
 
     [SerializeField] private bool multiBulletShoot = false;
-    [SerializeField] 
-    [Range(1,10)]
-    private int bulletCount = 1;
+    [SerializeField] [Range(1,10)] private int bulletCount = 1;
+
+    public int Id
+    {
+        get { return GetInstanceID();}
+    }
 
     internal int GetBulletCountToSpawn()
     {
@@ -35,4 +28,5 @@ public class WeaponDataSO : ScriptableObject
 
         return 1;
     }
+    
 }
