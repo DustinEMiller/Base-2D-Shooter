@@ -20,7 +20,7 @@ public class AgentWeapon : MonoBehaviour
         weapon = GetComponentInChildren<Weapon>();
     }
 
-    public virtual void AimWeapon(Vector2 targetPosition)
+    public void AimWeapon(Vector2 targetPosition)
     {
         var aimDirection = (Vector3) targetPosition - transform.position;
         desiredAngle = Mathf.Atan2(aimDirection.y, aimDirection.x) * Mathf.Rad2Deg;
