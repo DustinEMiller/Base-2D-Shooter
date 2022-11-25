@@ -13,9 +13,8 @@ MonoBehaviour:
   m_Name: AssaultRifleWeaponData
   m_EditorClassIdentifier: 
   <BulletData>k__BackingField: {fileID: 11400000, guid: af2173ad4cdba17499161157cd1ae953, type: 2}
-  <AmmoCapacity>k__BackingField: 100
   <AutomaticFire>k__BackingField: 1
-  <WeaponDelay>k__BackingField: 0.205
+  <CoolDownDuration>k__BackingField: 0.54
   <SpreadAngle>k__BackingField: 4
   multiBulletShoot: 0
   bulletCount: 1

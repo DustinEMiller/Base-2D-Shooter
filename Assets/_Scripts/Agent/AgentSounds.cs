@@ -14,7 +14,6 @@ public class AgentSounds : AudioPlayer
     
     public void PlayDeathSound()
     {
-        Debug.Log("play sound dea");
         PlayClip(deathClip);
     }
     

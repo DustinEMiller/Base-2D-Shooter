@@ -101,10 +101,12 @@ TextureImporter:
     externalNormalMap: 0
     heightScale: 0.25
     normalMapFilter: 0
+    flipGreenChannel: 0
   isReadable: 0
   streamingMipmaps: 0
   streamingMipmapsPriority: 0
   vTOnly: 0
+  ignoreMasterTextureLimit: 0
   grayScaleToAlpha: 0
   generateCubemap: 6
   cubemapConvolution: 0
@@ -115,7 +117,7 @@ TextureImporter:
     serializedVersion: 2
     filterMode: 0
     aniso: 2
-    mipBias: -100
+    mipBias: 0
     wrapU: 1
     wrapV: 1
     wrapW: 0
@@ -136,11 +138,14 @@ TextureImporter:
   textureType: 8
   textureShape: 1
   singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
   maxTextureSizeSet: 0
   compressionQualitySet: 0
   textureFormatSet: 0
   ignorePngGamma: 0
   applyGammaDecoding: 0
+  swizzle: 50462976
   platformSettings:
   - serializedVersion: 3
     buildTarget: DefaultTexturePlatform
@@ -794,9 +799,36 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
+    nameFileIdTable:
+      _sprites_props_and_UI_7: -2717902627330272622
+      _sprites_props_and_UI_0: -5444833171122426547
+      _sprites_props_and_UI_25: -3983217171171054898
+      _sprites_props_and_UI_26: -6576406407481533746
+      _sprites_props_and_UI_16: 8180324488298453594
+      _sprites_props_and_UI_1: 6225384134860475241
+      _sprites_props_and_UI_10: -4663124272102229955
+      _sprites_props_and_UI_22: -8200924395580441104
+      _sprites_props_and_UI_6: 1904172032860162155
+      _sprites_props_and_UI_23: -5562414154560789461
+      _sprites_props_and_UI_17: -4795135807788116053
+      _sprites_props_and_UI_5: 2413870474506498713
+      _sprites_props_and_UI_8: 2975468853910139061
+      _sprites_props_and_UI_19: 8015609922946477372
+      _sprites_props_and_UI_24: 6668462038991873726
+      _sprites_props_and_UI_9: 4343989639093749218
+      _sprites_props_and_UI_3: 1145355142162350472
+      _sprites_props_and_UI_2: 660003610483668503
+      _sprites_props_and_UI_18: 5997617101054121477
+      _sprites_props_and_UI_21: -3896609356426390180
+      _sprites_props_and_UI_15: -5993806228147083255
+      _sprites_props_and_UI_20: -8021792816722695497
+      _sprites_props_and_UI_11: -4590083579231151600
+      _sprites_props_and_UI_14: -4045329777244449312
+      _sprites_props_and_UI_13: 8673825945043610519
+      _sprites_props_and_UI_4: -3263733931297943937
+      _sprites_props_and_UI_12: -4864636176931420660
   spritePackingTag: 
   pSDRemoveMatte: 0
-  pSDShowRemoveMatteOption: 0
   userData: 
   assetBundleName: 
   assetBundleVariant: 

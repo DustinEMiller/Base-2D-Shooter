@@ -6,7 +6,7 @@ public abstract class EnemyAttack : MonoBehaviour
 {
     private EnemyAIBrain enemyBrain;
 
-    [field: SerializeField] protected float AttackdDelay { get; private set; } = 1;
+    [field: SerializeField] protected float AttackDelay { get; private set; } = 1;
     protected bool waitBeforeNextAttack;
 
     private void Awake()
@@ -19,7 +19,7 @@ public abstract class EnemyAttack : MonoBehaviour
     protected IEnumerator WaitBeforeAttackCoroutine()
     {
         waitBeforeNextAttack = true;
-        yield return new WaitForSeconds(AttackdDelay);
+        yield return new WaitForSeconds(AttackDelay);
         waitBeforeNextAttack = false;
     }
 

@@ -13,12 +13,13 @@ public class Weapon : MonoBehaviour
     [SerializeField] private Enemy target;
     [SerializeField] private CooldownSystem cooldownSystem;
     [field: SerializeField] public UnityEvent OnShoot{ get; set; }
-    [field: SerializeField] public UnityEvent OnGetTarget{ get; set; }
+    [field: SerializeField] public UnityEvent<Vector2> OnGetTarget{ get; set; }
 
     private void Update()
     {
         UseWeapon();
         TargetEnemy();
+        AimWeapon();
     }
 
     private void TargetEnemy()
@@ -31,15 +32,22 @@ public class Weapon : MonoBehaviour
             if (collider2d.TryGetComponent<Enemy>(out Enemy enemy) && target == null)
             {
                 target = enemy;
-                OnGetTarget?.Invoke();
             }
         }
         
     }
 
+    private void AimWeapon()
+    {
+        if (target != null)
+        {
+            OnGetTarget?.Invoke(target.transform.position);
+        }
+    }
+
     private void UseWeapon()
     {
-        if (target && !cooldownSystem.IsOnCoolDown(weaponData.Id))
+        if (target && !cooldownSystem.IsOnCoolDown(weaponData.Id) && !target.GetComponent<AgentHealthSystem>().isDead())
         {
             OnShoot?.Invoke();
             cooldownSystem.PutOnCoolDown(weaponData);
