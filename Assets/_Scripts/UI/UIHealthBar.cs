@@ -23,23 +23,22 @@ public class UIHealthBar : MonoBehaviour
         SetSliderValue();
     }
 
-    private void HealthSystem_OnHealthInitialized(object sender, EventArgs e)
+    private void HealthSystem_OnHealthInitialized(object sender, EventArgs eventArgs)
     {
-        Debug.Log("init");
         SetSliderValue();
     }
 
-    private void HealthSystem_OnHealthMaxChange(object sender, EventArgs e)
+    private void HealthSystem_OnHealthMaxChange(object sender, EventArgs eventArgs)
     {
         throw new NotImplementedException();
     }
     
-    private void HealthSystem_OnDamaged(object sender, EventArgs e)
+    private void HealthSystem_OnDamaged(object sender, int i)
     {
         SetSliderValue();
     }
     
-    private void HealthSystem_OnHealed(object sender, EventArgs e)
+    private void HealthSystem_OnHealed(object sender, int i)
     {
         SetSliderValue();
     }

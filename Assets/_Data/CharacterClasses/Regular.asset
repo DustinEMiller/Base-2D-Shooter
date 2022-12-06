@@ -1,0 +1,69 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1924091160fbc9649864d473375c6951, type: 3}
+  m_Name: Regular
+  m_EditorClassIdentifier: 
+  serializationData:
+    SerializedFormat: 2
+    SerializedBytes: 
+    ReferencedUnityObjects: []
+    SerializedBytesString: 
+    Prefab: {fileID: 0}
+    PrefabModificationsReferencedUnityObjects: []
+    PrefabModifications: []
+    SerializationNodes:
+    - Name: levelUpStatChanges
+      Entry: 7
+      Data: 0|System.Collections.Generic.Dictionary`2[[StatSO, Assembly-CSharp],[StatModifier,
+        Assembly-CSharp]], mscorlib
+    - Name: comparer
+      Entry: 7
+      Data: 1|System.Collections.Generic.ObjectEqualityComparer`1[[StatSO, Assembly-CSharp]],
+        mscorlib
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 12
+      Data: 0
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+  defaultStats:
+    health: 10
+    statData:
+    - stat: {fileID: 11400000, guid: c01415c88b2f458459b0edc53e36304d, type: 2}
+      baseValue: 10
+    - stat: {fileID: 11400000, guid: e1e62b5df0957ba4faf96fda33415d1c, type: 2}
+      baseValue: 0
+    - stat: {fileID: 11400000, guid: 4b2207b5cc2b6be4783d448c86fb6f93, type: 2}
+      baseValue: 5
+    - stat: {fileID: 11400000, guid: 2f1d33c76ffb1a6488a98bd04e4b873e, type: 2}
+      baseValue: 0
+    - stat: {fileID: 11400000, guid: 9228873cf22dc1046b258c65aa1ced67, type: 2}
+      baseValue: 5
+    - stat: {fileID: 11400000, guid: 7e8482503bbe7564e9853b787fa87600, type: 2}
+      baseValue: 0
+    - stat: {fileID: 11400000, guid: 70fd208a9f7eaf141ac943cde93ac2b7, type: 2}
+      baseValue: 0
+    - stat: {fileID: 11400000, guid: 781020e028884f643bafe31c6eb57165, type: 2}
+      baseValue: 1
+    - stat: {fileID: 11400000, guid: 158d38c6c52854e45923713bb2a6a08c, type: 2}
+      baseValue: 0
+    - stat: {fileID: 11400000, guid: 6be182df7a4f0a54caff4af0c397ebda, type: 2}
+      baseValue: 0
+    - stat: {fileID: 11400000, guid: d3aaa0b545a83444b99b8743ad362e70, type: 2}
+      baseValue: 0
+  healthSystem: {fileID: 0}

@@ -7,15 +7,16 @@ using UnityEngine.Events;
 public class AgentHealthSystem : MonoBehaviour, IHittable
 {
     [field: SerializeField] public event EventHandler OnHealthMaxChange;
-    [field: SerializeField] public event EventHandler OnDamaged;
+    [field: SerializeField] public event EventHandler<int> OnDamaged;
     [field: SerializeField] public event EventHandler OnDied;
-    [field: SerializeField] public event EventHandler OnHealed;
+    [field: SerializeField] public event EventHandler<int> OnHealed;
     [field: SerializeField] public event EventHandler OnHealthInitialized;
     [field: SerializeField] public UnityEvent OnGetHit { get; set; }
     [field: SerializeField] public UnityEvent OnDie { get; set; }
 
     [SerializeField] private int healthAmount;
     [SerializeField] private int maxHealth;
+    [SerializeField] private PlayerStatsSystem playerStatsSystem;
     
     private void Awake()
     {
@@ -29,7 +30,7 @@ public class AgentHealthSystem : MonoBehaviour, IHittable
         healthAmount = Mathf.Clamp(healthAmount, 0, maxHealth);
 
         OnGetHit?.Invoke();
-        OnDamaged?.Invoke(this, EventArgs.Empty);
+        OnDamaged?.Invoke(this, damageAmount);
 
         if (isDead())
         {
@@ -40,15 +41,18 @@ public class AgentHealthSystem : MonoBehaviour, IHittable
 
     public void Heal(int healAmount)
     {
-        healthAmount += healAmount;
-        healthAmount = Mathf.Clamp(healthAmount, 0, maxHealth);
-        OnHealed?.Invoke(this, EventArgs.Empty);
+        if (healAmount != maxHealth)
+        {
+            healthAmount += healAmount;
+            healthAmount = Mathf.Clamp(healthAmount, 0, maxHealth);
+            OnHealed?.Invoke(this, healAmount);
+        }
     }
 
     public void HealFull()
     {
         healthAmount = maxHealth;
-        OnHealed?.Invoke(this, EventArgs.Empty);
+        OnHealed?.Invoke(this, healthAmount);
     }
 
     public void SetHealthAmountMax(int maxHealth, bool updateHealthAmount)

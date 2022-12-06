@@ -13,28 +13,44 @@ using UnityEngine;
         [Header("On Level Up")]
         [Required] [SerializeField] private Dictionary<StatSO, StatModifier> levelUpStatChanges = new Dictionary<StatSO, StatModifier>();
 
-        private float mana = 0f;
-
         public StatsHolder StatsHolder { get; private set; } = new StatsHolder();
         public LevelSystem LevelSystem { get; } = new LevelSystem();
 
         public int LoadPriority { get { return 100; } }
-        
 
+        [SerializeField] private AgentHealthSystem healthSystem;
+        private float hpPerSecond;
+        private float hpHealed = 0.0f;
+
+
+        public void Initialize()
+        {
+            StatsHolder = defaultStats;
+            hpPerSecond = (1.0f / (5.0f / (1.0f + ((float)(StatsHolder.GetStatValue(StatTypes.HPRegen)) - 1.0f) / 2.25f)));
+        }
         public void Tick()
         {
-            RegenerateMana();
+            if (StatsHolder.GetStatValue(StatTypes.HPRegen) > 0)
+            {
+                RegenerateHP();
+            }
+            
         }
 
-        #region Mana
-        
-
-        private void RegenerateMana()
+        private void RegenerateHP()
         {
-            //Mana += Time.deltaTime * StatsHolder.GetStatValue(StatTypes.ManaRegen);
+            hpHealed += Time.deltaTime * hpPerSecond;
+            if (hpHealed  >= 1.0f)
+            {
+                healthSystem.Heal(1);
+                hpHealed = hpHealed - 1.0f;
+            }
         }
 
-        #endregion
+        public void SetHealthSystem(AgentHealthSystem health)
+        {
+            healthSystem = health;
+        }
 
         /*#region Level Up
         private void GiveLevelUpRewards()

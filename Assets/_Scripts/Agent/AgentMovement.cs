@@ -10,7 +10,6 @@ using UnityEngine.Events;
 public class AgentMovement : MonoBehaviour
 {
     protected Rigidbody2D rigidBody2d;
-    
     [field: SerializeField]public MovementDataSO MovementData { get; set; }
     
     [SerializeField] protected float currentVelocity = 3f;
