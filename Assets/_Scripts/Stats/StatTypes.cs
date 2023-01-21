@@ -12,5 +12,6 @@ public enum StatTypes
     LifeSteal,
     Luck,
     Range,
-    Speed
+    Speed,
+    Damage
 }

@@ -13,5 +13,7 @@ MonoBehaviour:
   m_Name: EnemyChortData
   m_EditorClassIdentifier: 
   <MaxHealth>k__BackingField: 2
+  <HealthPerWave>k__BackingField: 3
   <Damage>k__BackingField: 1
+  <DamagePerWave>k__BackingField: 0.6
   <AttackDelay>k__BackingField: 3

@@ -30,20 +30,25 @@ using UnityEngine;
         }
         public void Tick()
         {
-            if (StatsHolder.GetStatValue(StatTypes.HPRegen) > 0)
-            {
-                RegenerateHP();
-            }
-            
+            RegenerateHP();
         }
 
         private void RegenerateHP()
         {
+            if (StatsHolder.GetStatValue(StatTypes.HPRegen) == 0 || (healthSystem.IsFullHealth() && StatsHolder.GetStatValue(StatTypes.HPRegen) > 0))
+            {
+                return;
+            }
+
             hpHealed += Time.deltaTime * hpPerSecond;
             if (hpHealed  >= 1.0f)
             {
                 healthSystem.Heal(1);
                 hpHealed = hpHealed - 1.0f;
+            } else if (hpHealed <= -1.0f)
+            {
+                healthSystem.Damage(1);
+                hpHealed = hpHealed + 1.0f;
             }
         }
 

@@ -41,7 +41,7 @@ public class AgentHealthSystem : MonoBehaviour, IHittable
 
     public void Heal(int healAmount)
     {
-        if (healAmount != maxHealth)
+        if (healthAmount != maxHealth)
         {
             healthAmount += healAmount;
             healthAmount = Mathf.Clamp(healthAmount, 0, maxHealth);
